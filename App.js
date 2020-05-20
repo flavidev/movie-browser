@@ -12,11 +12,23 @@ const Stack = createStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "black",
+          },
+          headerTitleAlign: "center",
+          headerTintColor: "white",
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
+        }}
+      >
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: "MovieBrowser" }}
+          options={{ title: "MovieBrowser"}}
         />
         <Stack.Screen
           name="Results"
@@ -26,7 +38,9 @@ function App() {
         <Stack.Screen
           name="Details"
           component={Details}
-          options={{ title: "Movie Details" }}
+          options={{
+            title: "Movie Details",
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

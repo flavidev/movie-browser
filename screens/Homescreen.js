@@ -32,10 +32,11 @@ export default class Homescreen extends Component {
           />
           <TouchableOpacity
             onPress={
-              this.state.search.length>2
+              this.state.search.length > 2
                 ? () =>
                     this.props.navigation.navigate("Results", {
                       search: this.state.search,
+                      navigation: this.props.navigation,
                     })
                 : null
             }

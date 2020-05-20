@@ -2,10 +2,16 @@ import React, { Component } from "react";
 import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
 
 export default class Movie extends Component {
+
+  //Callback function 
+  goToDetails = this.props.goToDetails
+
   render() {
     return (
       <View style={styles.movieContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => this.goToDetails(this.props.imdbID)}
+        >
           <Text style={styles.titles}> {this.props.title} </Text>
         </TouchableOpacity>
       </View>
@@ -16,11 +22,11 @@ export default class Movie extends Component {
 const styles = StyleSheet.create({
   movieContainer: {
     backgroundColor: "black",
-    marginVertical: 10,
+    margin: 15,
   },
   titles: {
     color: "white",
-    fontSize: 20,
+    fontSize: 25,
     textAlign: "center",
   },
 });

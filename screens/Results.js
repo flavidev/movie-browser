@@ -1,59 +1,65 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, ImageBackground, Button, FlatList } from "react-native";
+import { StyleSheet, View, ImageBackground, FlatList } from "react-native";
 import Movie from "../components/Movie";
 
 export default class Results extends Component {
   state = {
-    API_Adress: `http://www.omdbapi.com/?apikey=21277e71&s=${this.props.route.params.search}`,
-    fetchData: {},
+    page: 1,
+    loading:true
   };
 
+  // api 21277e71
+  data = {
+    API_Adress: `http://www.omdbapi.com/?apikey=5a1e4eca&s=${this.props.route.params.search}`,
+    movies: [],
+    totalResults: 0,
+  };
+
+  // Navigate to Details
+  goToDetails = (imdbID) => {
+    this.props.navigation.navigate("Details", { imdbID: imdbID });
+  };
 
   // Request API Data
-  fetchResults(page = 1) {
-    const results = fetch(this.state.API_Adress + `&page=${page}`)
+  fetchResults(page = this.state.page) {
+    const results = fetch(this.data.API_Adress + `&page=${this.state.page}`)
       .then((response) => response.json())
       .then((data) =>
-        data.Response
-          ? this.setState({ fetchData: data })
-          : alert("Could not complete request")
+        data.Response === "True"
+          ? ((this.data.totalResults = data.totalResults),
+            (this.data.movies = [...this.data.movies, ...data.Search]),
+            this.setState({
+              page: this.state.page + 1,
+              loading:false
+            }))
+          : console.log("No results remaining")
       );
   }
-  
-  
-  render() {
+
+  componentDidMount() {
     this.fetchResults();
-    
+  }
 
-
+  render() {
     return (
       <ImageBackground
-        source={require("../assets/cinema.jpg")}
+        source={require("../assets/blackbackground.png")}
         style={styles.background}
       >
         <View>
-          <Text style={{ color: "white" }}>
-            Total Results = {this.state.fetchData.totalResults}
-          </Text>
-
-          <Text style={{ color: "white" }}>
-            Total Pages = {Math.ceil(this.state.fetchData.totalResults / 10)}
-          </Text>
-
-
-          <Button
-            title="test"
-            onPress={() => console.log(this.state.fetchData)}
-          ></Button>
-
-    <View style={styles.resultsContainer}>
-      <FlatList
-        data={this.state.fetchData.Search}
-        renderItem={({ item }) => <Movie title={item.Title} />}
-        keyExtractor={item => item.imdbID}
-      />
-    </View>
-
+          <FlatList
+            data={this.data.movies}
+            renderItem={({ item }) => (
+              <Movie
+                title={item.Title}
+                imdbID={item.imdbID}
+                goToDetails={this.goToDetails}
+              />
+            )}
+            keyExtractor={(item, index) => String(index)}
+            onEndReached={() => this.fetchResults()}
+            onEndReachedThreshold={0.5}
+          />
         </View>
       </ImageBackground>
     );
@@ -65,8 +71,7 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
   },
-  resultsContainer:{
-    margin: 15,
-
-  }
+  resultsContainer: {
+    margin: 20,
+  },
 });
