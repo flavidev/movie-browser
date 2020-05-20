@@ -15,9 +15,6 @@ function App() {
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
-          headerStyle: {
-            backgroundColor: "black",
-          },
           headerTitleAlign: "center",
           headerTintColor: "white",
           headerTitleStyle: {
@@ -28,19 +25,28 @@ function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: "MovieBrowser"}}
+          options={{
+            title: "MovieBrowser",
+            headerStyle: {
+              backgroundColor: "#7F2724",
+            },
+          }}
         />
         <Stack.Screen
           name="Results"
           component={Results}
-          options={{ title: "Results" }}
+          options={({ route }) => ({
+            title: `Showing results for: ${route.params.search}`,
+            headerStyle: { backgroundColor: "black" },
+          })}
         />
         <Stack.Screen
           name="Details"
           component={Details}
-          options={{
-            title: "Movie Details",
-          }}
+          options={({ route }) => ({
+            title: `Loading ${route.params.imdbID}`,
+            headerStyle: { backgroundColor: "black" },
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>

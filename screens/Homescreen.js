@@ -22,7 +22,7 @@ export default class Homescreen extends Component {
         <View style={styles.container}>
           <TextInput
             style={styles.searchBox}
-            placeholder="Type movie name"
+            placeholder="Type movie title"
             value={this.state.search}
             onChangeText={(text) =>
               this.setState({

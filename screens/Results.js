@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { StyleSheet, View, ImageBackground, FlatList } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 import Movie from "../components/Movie";
 
 export default class Results extends Component {
   state = {
     page: 1,
-    loading:true
+    loading: true,
   };
 
   // api 21277e71
@@ -17,7 +17,10 @@ export default class Results extends Component {
 
   // Navigate to Details
   goToDetails = (imdbID) => {
-    this.props.navigation.navigate("Details", { imdbID: imdbID });
+    this.props.navigation.navigate("Details", {
+      imdbID: imdbID,
+      navigation: this.props.navigation,
+    });
   };
 
   // Request API Data
@@ -30,7 +33,7 @@ export default class Results extends Component {
             (this.data.movies = [...this.data.movies, ...data.Search]),
             this.setState({
               page: this.state.page + 1,
-              loading:false
+              loading: false,
             }))
           : console.log("No results remaining")
       );
@@ -39,29 +42,31 @@ export default class Results extends Component {
   componentDidMount() {
     this.fetchResults();
   }
+  componentDidUpdate() {
+    if (this.data.totalResults !== 0) {
+      this.props.navigation.setOptions({
+        title: `Total Results: ${this.data.totalResults}`,
+      });
+    }
+  }
 
   render() {
     return (
-      <ImageBackground
-        source={require("../assets/blackbackground.png")}
-        style={styles.background}
-      >
-        <View>
-          <FlatList
-            data={this.data.movies}
-            renderItem={({ item }) => (
-              <Movie
-                title={item.Title}
-                imdbID={item.imdbID}
-                goToDetails={this.goToDetails}
-              />
-            )}
-            keyExtractor={(item, index) => String(index)}
-            onEndReached={() => this.fetchResults()}
-            onEndReachedThreshold={0.5}
-          />
-        </View>
-      </ImageBackground>
+      <View style={{ flex: 1, backgroundColor: "#000" }}>
+        <FlatList
+          data={this.data.movies}
+          renderItem={({ item }) => (
+            <Movie
+              title={item.Title}
+              imdbID={item.imdbID}
+              goToDetails={this.goToDetails}
+            />
+          )}
+          keyExtractor={(item, index) => String(index)}
+          onEndReached={() => this.fetchResults()}
+          onEndReachedThreshold={0.5}
+        />
+      </View>
     );
   }
 }
