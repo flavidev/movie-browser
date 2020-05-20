@@ -35,7 +35,7 @@ export default class Homescreen extends Component {
               this.state.search.length > 2
                 ? () =>
                     this.props.navigation.navigate("Results", {
-                      search: this.state.search,
+                      search: this.state.search.trim(),
                       navigation: this.props.navigation,
                     })
                 : null

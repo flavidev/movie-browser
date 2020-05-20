@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "moviebrowser",
+    "name": "Movie Browser",
     "slug": "moviebrowser",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
@@ -23,5 +23,5 @@
       "supportsTablet": true
     }
   },
-  "name": "moviebrowser"
+  "name": "Movie Browser"
 }

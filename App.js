@@ -20,6 +20,9 @@ function App() {
           headerTitleStyle: {
             fontWeight: "bold",
           },
+          headerStyle: {
+            backgroundColor: "#7F2724",
+          },
         }}
       >
         <Stack.Screen
@@ -27,9 +30,6 @@ function App() {
           component={HomeScreen}
           options={{
             title: "MovieBrowser",
-            headerStyle: {
-              backgroundColor: "#7F2724",
-            },
           }}
         />
         <Stack.Screen
@@ -37,7 +37,6 @@ function App() {
           component={Results}
           options={({ route }) => ({
             title: `Showing results for: ${route.params.search}`,
-            headerStyle: { backgroundColor: "black" },
           })}
         />
         <Stack.Screen
@@ -45,7 +44,6 @@ function App() {
           component={Details}
           options={({ route }) => ({
             title: `Loading ${route.params.imdbID}`,
-            headerStyle: { backgroundColor: "black" },
           })}
         />
       </Stack.Navigator>

@@ -87,8 +87,9 @@ const styles = StyleSheet.create({
   poster: {
     width: 200,
     height: 200,
-    marginTop: 15,
-    marginBottom: 30,
+    marginTop: 25 ,
+    marginBottom:20,
+
     alignSelf: "center",
   },
   detailsContainer: {
@@ -97,7 +98,8 @@ const styles = StyleSheet.create({
   },
   detailsText: {
     color: "white",
-    fontSize: 15,
+    fontSize: 16,
     paddingHorizontal: 10,
+    marginBottom:3
   },
 });
