@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, ImageBackground, Image } from "react-native";
+import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
 
 export default class Details extends Component {
   state = {
@@ -42,38 +42,41 @@ export default class Details extends Component {
           }}
           style={styles.poster}
         />
-        <View style={styles.detailsContainer}>
-          <Text style={styles.detailsText}>
-            Title: {this.state.movieDetails.Title}
-          </Text>
-          <Text style={styles.detailsText}>
-            Released: {this.state.movieDetails.Released}
-          </Text>
-          <Text style={styles.detailsText}>
-            Actors: {this.state.movieDetails.Actors}
-          </Text>
-          <Text style={styles.detailsText}>
-            Genre: {this.state.movieDetails.Genre}
-          </Text>
-          <Text style={styles.detailsText}>
-            Country: {this.state.movieDetails.Country}
-          </Text>
-          <Text style={styles.detailsText}>
-            Director: {this.state.movieDetails.Director}
-          </Text>
-          <Text style={styles.detailsText}>
-            Language: {this.state.movieDetails.Language}
-          </Text>
-          <Text style={styles.detailsText}>
-            IMDB Rating: {this.state.movieDetails.imdbRating}
-          </Text>
-          <Text style={styles.detailsText}>
-            Runtime: {this.state.movieDetails.Runtime}
-          </Text>
-          <Text style={styles.detailsText}>
-            Plot: {this.state.movieDetails.Plot}
-          </Text>
-        </View>
+        <ScrollView>
+          <View style={styles.detailsContainer}>
+            <Text style={styles.detailsText}>
+              Title: {this.state.movieDetails.Title}
+            </Text>
+            <Text style={styles.detailsText}>
+              Released: {this.state.movieDetails.Released}
+            </Text>
+            <Text style={styles.detailsText}>
+              Actors: {this.state.movieDetails.Actors}
+            </Text>
+            <Text style={styles.detailsText}>
+              Genre: {this.state.movieDetails.Genre}
+            </Text>
+            <Text style={styles.detailsText}>
+              Country: {this.state.movieDetails.Country}
+            </Text>
+            <Text style={styles.detailsText}>
+              Director: {this.state.movieDetails.Director}
+            </Text>
+            <Text style={styles.detailsText}>
+              Language: {this.state.movieDetails.Language}
+            </Text>
+            <Text style={styles.detailsText}>
+              IMDB Rating: {this.state.movieDetails.imdbRating}
+            </Text>
+            <Text style={styles.detailsText}>
+              Runtime: {this.state.movieDetails.Runtime}
+            </Text>
+            <Text style={styles.detailsText}>
+              Plot:{" "}
+              {this.state.movieDetails.Plot}
+            </Text>
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -87,8 +90,8 @@ const styles = StyleSheet.create({
   poster: {
     width: 200,
     height: 200,
-    marginTop: 25 ,
-    marginBottom:20,
+    marginTop: 25,
+    marginBottom: 20,
 
     alignSelf: "center",
   },
@@ -100,6 +103,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     paddingHorizontal: 10,
-    marginBottom:3
+    marginBottom: 3,
   },
 });

@@ -35,6 +35,8 @@ export default class Results extends Component {
               page: this.state.page + 1,
               loading: false,
             }))
+          : data.Error && this.state.page === 1
+          ? (alert(data.Error), this.props.navigation.goBack())
           : console.log("No results remaining")
       );
   }
