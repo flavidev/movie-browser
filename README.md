@@ -1,3 +1,9 @@
+# MY FULL PRESENTATION => https://www.youtube.com/watch?v=LGaie5mfngk
+
+***
+## PROJECT DEFAULT REQUIREMENTS BELOW:
+***
+
 # Project 2 - Movie Browser
 
 For this project, you'll be implementing a movie browser. It will allow users to
